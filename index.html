@@ -1,60 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Practice</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-
-
-    <script>
-
-        // Marks System
-        var Marks=80
-        switch(true){
-
-            case
-            (Marks<=100 && Marks>=80):
-            document.write("A+");
-            break;
-
-            case
-            (Marks<=80 && Marks>=70):
-            document.write("A");
-            break;
-
-            case
-            (Marks<=70 && Marks>=60):
-            document.write("A-");
-            break;
-
-            case
-            (Marks<=60 && Marks>=50):
-            document.write("B");
-            break;
-
-            case
-            (Marks<=50 && Marks>=40):
-            document.write("C");
-            break;
-
-            case
-            (Marks<=50 && Marks>=40):
-            document.write("C");
-            break;
-
-            case
-            (Marks<=40 && Marks>=33):
-            document.write("D");
-            break;
-
-            default:
-                document.write("F")
-
-
-        }
-    </script>
+  <div class="container">
+    <h1>Task Manager</h1>
+    <div class="task-input">
+      <input type="text" id="task-input" placeholder="Enter a new task">
+      <button id="add-task">Add Task</button>
+    </div>
+    <ul id="task-list"></ul>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
