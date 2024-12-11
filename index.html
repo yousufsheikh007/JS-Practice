@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Task Manager</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Task Manager</h1>
-    <div class="task-input">
-      <input type="text" id="task-input" placeholder="Enter a new task">
-      <button id="add-task">Add Task</button>
+    <div class="container">
+        <h1>Bangladesh Weather App</h1>
+        <div class="search-box">
+            <input type="text" id="district-input" placeholder="Enter district name...">
+            <button id="search-button">Search</button>
+        </div>
+        <div class="weather-result" id="weather-result">
+            <!-- Weather info will be displayed here -->
+        </div>
     </div>
-    <ul id="task-list"></ul>
-  </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,53 +1,40 @@
-// Selecting elements
-const taskInput = document.getElementById("task-input");
-const addTaskButton = document.getElementById("add-task");
-const taskList = document.getElementById("task-list");
+// List of districts in English
+const districts = [
+    "Dhaka", "Chattogram", "Rajshahi", "Khulna", "Barishal", "Sylhet", "Rangpur", "Mymensingh",
+    "Comilla", "Feni", "Noakhali", "Lakshmipur", "Cox's Bazar", "Bandarban", "Rangamati", 
+    "Khagrachari", "Jamalpur", "Netrokona", "Sunamganj", "Habiganj", "Moulvibazar"
+];
 
-// Function to add a task
-function addTask() {
-  const taskText = taskInput.value.trim();
+// OpenWeatherMap API credentials
+const apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
+const apiBase = 'https://api.openweathermap.org/data/2.5/weather';
 
-  if (taskText === "") {
-    alert("Please enter a task!");
-    return;
-  }
+document.getElementById('search-button').addEventListener('click', () => {
+    const district = document.getElementById('district-input').value.trim();
 
-  // Create task item
-  const taskItem = document.createElement("li");
-  taskItem.classList.add("task-item");
-  taskItem.innerHTML = `
-    <span>${taskText}</span>
-    <div class="task-buttons">
-      <button class="complete-btn">Complete</button>
-      <button class="delete-btn">Delete</button>
-    </div>
-  `;
+    if (!districts.includes(district)) {
+        alert('Please enter a valid district name!');
+        return;
+    }
 
-  // Add task item to the list
-  taskList.appendChild(taskItem);
-
-  // Clear input
-  taskInput.value = "";
-
-  // Add event listeners to buttons
-  const completeButton = taskItem.querySelector(".complete-btn");
-  const deleteButton = taskItem.querySelector(".delete-btn");
-
-  completeButton.addEventListener("click", () => {
-    taskItem.classList.toggle("completed");
-  });
-
-  deleteButton.addEventListener("click", () => {
-    taskItem.remove();
-  });
-}
-
-// Event listener for add task button
-addTaskButton.addEventListener("click", addTask);
-
-// Add task by pressing "Enter"
-taskInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    addTask();
-  }
+    fetch(`${apiBase}?q=${district},bd&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then(data => displayWeather(data))
+        .catch(() => alert('Failed to fetch weather data!'));
 });
+
+function displayWeather(data) {
+    const weatherResult = document.getElementById('weather-result');
+    if (data.cod === 200) {
+        weatherResult.innerHTML = `
+            <h2>Weather in ${data.name}</h2>
+            <p>Temperature: ${data.main.temp}°C</p>
+            <p>Condition: ${data.weather[0].description}</p>
+            <p>Humidity: ${data.main.humidity}%</p>
+            <p>Wind Speed: ${data.wind.speed} m/s</p>
+        `;
+        weatherResult.style.display = 'block';
+    } else {
+        alert('No weather data found for this district!');
+    }
+}
